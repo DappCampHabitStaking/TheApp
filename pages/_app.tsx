@@ -1,14 +1,24 @@
 import '../styles/globals.css'
 
+import Layout from 'components/Layout/layout'
+import { NextPage } from 'next'
 import Head from 'next/head'
-import React from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { getCurrentAccount, getEthereumObject, setupEthEventListeners } from 'utils/common'
 import { AccountContext, ContractsContext } from 'utils/context'
 
 import type { AppProps } from "next/app";
-function MyApp({ Component, pageProps }: AppProps) {
-  // const getLayout = Component.getLayout || ((page) => page);
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout || ((page) => page);
   const [account, setAccount] = React.useState("");
   const [contracts, setContracts] = React.useState({
     campContract: null,
@@ -62,8 +72,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             draggable
             pauseOnHover
           />
-          {/* {getLayout(<Component {...pageProps} />)} */}
-          <Component {...pageProps} />
+          <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
         </ContractsContext.Provider>
       </AccountContext.Provider>
     </>

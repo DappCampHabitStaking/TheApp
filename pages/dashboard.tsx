@@ -10,9 +10,7 @@ const Dashboard = (props: Props) => {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Layout>
-        <div className="bg-black h-full w-full flex-grow relative">hello</div>
-      </Layout>
+      <p>Hello</p>
     </>
   );
 };
