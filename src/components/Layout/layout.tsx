@@ -1,21 +1,34 @@
+import Address from 'components/Address/address'
 import React from 'react'
+import { connectWallet } from 'utils/common'
+import { useAccount } from 'utils/context'
 
 type Props = {
   children: React.ReactNode;
 };
 
 const Layout = ({ children }: Props) => {
+  const account = useAccount();
+  const isMetamaskConnected = !!account;
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="h-16 shadow-md bg-gray-800 flex items-center py-6 px-8 justify-between">
-        <h2 className="font-semibold text-xl text-gray-400">InfinityHabit</h2>
+        <h2 className="font-semibold text-xl text-gray-400">InfiniteHabit</h2>
         <nav>
-          <button
-            type="button"
-            className="bg-gradient-to-br from-cyan-500 to-indigo-500 rounded-md text-md py-1 px-4 text-gray-100"
-          >
-            Connect Wallet
-          </button>
+          {!isMetamaskConnected ? (
+            <button
+              type="button"
+              className="bg-gradient-to-br from-cyan-500 to-indigo-500 rounded-md py-1 px-4 text-gray-100 text-sm"
+              onClick={connectWallet}
+            >
+              Connect Wallet
+            </button>
+          ) : (
+            <>
+              <Address address={account} />
+            </>
+          )}
         </nav>
       </header>
 

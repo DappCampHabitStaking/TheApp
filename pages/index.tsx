@@ -1,8 +1,7 @@
+import Layout from 'components/Layout/layout'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import Layout from '../components/Layout/layout'
 
 import type { NextPage } from "next";
 
@@ -10,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Infinity Habit</title>
+        <title>Infinite Habit</title>
       </Head>
       <Layout>
         <div className="bg-black h-full w-full flex-grow relative">
@@ -38,7 +37,7 @@ const Home: NextPage = () => {
 
           <div className="absolute bottom-20 left-12">
             <h1 className="text-gray-300 text-6xl">
-              Infinity <strong>Habit</strong>
+              Infinite <strong>Habit</strong>
             </h1>
             <p className="text-2xl text-gray-500">
               Make better habit, better life, better you!

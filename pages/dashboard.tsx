@@ -1,7 +1,6 @@
+import Layout from 'components/Layout/layout'
 import Head from 'next/head'
 import React from 'react'
-
-import Layout from '../components/Layout/layout'
 
 type Props = {};
 

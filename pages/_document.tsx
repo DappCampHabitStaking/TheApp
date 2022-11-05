@@ -6,7 +6,6 @@ export default class Document extends NextDocument {
       <Html>
         <Head>
           <meta name="description" content="Infinity Habit"></meta>
-          <title>Infinity Habit</title>
           <link
             rel="shortcut icon"
             href="https://www.dappcamp.xyz/favicon.png"
