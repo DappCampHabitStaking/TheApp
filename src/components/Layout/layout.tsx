@@ -1,4 +1,5 @@
 import Address from 'components/Address/address'
+import Balance from 'components/Balance/balance'
 import React from 'react'
 import { connectWallet } from 'utils/common'
 import { useAccount } from 'utils/context'
@@ -27,6 +28,7 @@ const Layout = ({ children }: Props) => {
           ) : (
             <>
               <Address address={account} />
+              <Balance address={account} />
             </>
           )}
         </nav>

@@ -60,10 +60,30 @@ export const getCurrentAccount = async () => {
 
 export const connectWallet = async () => {
   const { ethereum } = window as any;
-  if (!ethereum) return null;
+  if (!ethereum) {
+    toast.info("Please install Metamask.");
+  }
 
   await ethereum.request({
     method: "eth_requestAccounts",
   });
   location.reload();
+};
+
+// export const getSignedContract = (address, abi) => {
+//   const { ethereum } = window;
+
+//   const provider = new ethers.providers.Web3Provider(ethereum, "any");
+
+//   const signer = provider.getSigner();
+//   return new ethers.Contract(address, abi, signer);
+// };
+
+export const getAccountBalance = async (address: string) => {
+  const { ethereum } = window as any;
+
+  const provider = new ethers.providers.Web3Provider(ethereum, "any");
+
+  const signer = provider.getSigner(address);
+  return await signer.getBalance();
 };
