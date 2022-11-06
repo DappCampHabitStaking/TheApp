@@ -29,7 +29,7 @@ const Home: NextPage = () => {
               href="/dashboard"
               className="h-full w-full py-4 px-12 block text-gray-100 text-2xl"
             >
-              JOIN
+              E X P L O R E
             </Link>
           </button>
         </div>

@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Layout from 'components/Layout/layout'
 import { NextPage } from 'next'
@@ -65,7 +66,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <AccountContext.Provider value={account}>
         <ContractsContext.Provider value={contracts}>
           <ToastContainer
-            position="bottom-center"
+            position="top-center"
             autoClose={5000}
             closeOnClick
             pauseOnFocusLoss
