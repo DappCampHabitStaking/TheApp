@@ -2,11 +2,15 @@ import '../styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import Layout from 'components/Layout/layout'
+import counterContractMetadata from 'data/abis/Counter.metadata.json'
+import { Contract } from 'ethers'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import React, { ReactElement, ReactNode } from 'react'
 import { ToastContainer } from 'react-toastify'
-import { getCurrentAccount, getEthereumObject, setupEthEventListeners } from 'utils/common'
+import {
+  getCurrentAccount, getEthereumObject, getSignedContract, setupEthEventListeners
+} from 'utils/common'
 import { AccountContext, ContractsContext } from 'utils/context'
 
 import type { AppProps } from "next/app";
@@ -18,13 +22,19 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+export type ContractType = {
+  counterContract: Contract | null;
+};
+
+const counterContractAddr = process.env.NEXT_PUBLIC_COUNTER_ADDRESS as string;
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
   const [account, setAccount] = React.useState("");
-  const [contracts, setContracts] = React.useState({
-    campContract: null,
-    dcWarriorsContract: null,
-    stakingContract: null,
+  const [contracts, setContracts] = React.useState<ContractType>({
+    counterContract: null,
+    // dcWarriorsContract: null,
+    // stakingContract: null,
   });
 
   React.useEffect(() => {
@@ -34,14 +44,15 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
       setupEthEventListeners(ethereum);
 
-      // const campContract = getSignedContract(
-      //   campContractAddr,
-      //   campContractMetadata.output.abi
-      // );
+      const counterContract = getSignedContract(
+        counterContractAddr,
+        counterContractMetadata
+      );
       // const dcWarriorsContract = getSignedContract(
       //   dappCampWarriorsContractAddr,
       //   warriorsContractMetadata.output.abi
       // );
+
       // const stakingContract = getSignedContract(
       //   stakingContractAddr,
       //   stakingContractMetdata.output.abi
@@ -50,7 +61,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       // if (!campContract || !dcWarriorsContract || !stakingContract) return;
 
       const currentAccount = await getCurrentAccount();
-      // setContracts({ campContract, dcWarriorsContract, stakingContract });
+      setContracts({ counterContract });
       setAccount(currentAccount);
     };
 

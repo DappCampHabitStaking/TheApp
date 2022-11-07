@@ -70,14 +70,14 @@ export const connectWallet = async () => {
   location.reload();
 };
 
-// export const getSignedContract = (address, abi) => {
-//   const { ethereum } = window;
+export const getSignedContract = (address: string, abi: any) => {
+  const { ethereum } = window as any;
 
-//   const provider = new ethers.providers.Web3Provider(ethereum, "any");
+  const provider = new ethers.providers.Web3Provider(ethereum, "any");
 
-//   const signer = provider.getSigner();
-//   return new ethers.Contract(address, abi, signer);
-// };
+  const signer = provider.getSigner();
+  return new ethers.Contract(address, abi, signer);
+};
 
 export const getAccountBalance = async (address: string) => {
   const { ethereum } = window as any;
